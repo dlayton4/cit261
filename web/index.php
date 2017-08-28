@@ -5,7 +5,7 @@ require('../vendor/autoload.php');
 $app = new Silex\Application();
 $app['debug'] = true;
 
-$dbopts = parse_url(getenv('DATABSE_URL'));
+$dbopts = parse_url(getenv('DATABASE_URL'));
 $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
 	array(
 		'pdo.server' => array(
@@ -54,7 +54,7 @@ $app->get('/db/', function() use($app) {
 	// return $app['twig']->render('database.twig', array(
 	// 	'names' => $names
 	// ));
-	return "<p>".$dbopts['user']."</p>"."<p>".$dbopts['pass']."</p>"."<p>".$dbopts['host']."</p>"."<p>".$dbopts['port']."</p>".'<p>'.ltrim($dbopts["path"],'/').'</p>';
+	return "<p>DATABASE_URL".getenv('DATABASE_URL')."</p>"."<p>USERNAME".$dbopts['user']."</p>"."<p>PASSWORD".$dbopts['pass']."</p>"."<p>HOST".$dbopts['host']."</p>"."<p>PORT".$dbopts['port']."</p>".'<p>PATH'.ltrim($dbopts["path"],'/').'</p>';
 });
 
 $app->run();
