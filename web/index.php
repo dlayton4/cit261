@@ -54,7 +54,7 @@ $app->get('/db/', function() use($app) {
 	// return $app['twig']->render('database.twig', array(
 	// 	'names' => $names
 	// ));
-	return "<p>DATABASE_URL".getenv('DATABASE_URL')."</p>"."<p>USERNAME".$dbopts['user']."</p>"."<p>PASSWORD".$dbopts['pass']."</p>"."<p>HOST".$dbopts['host']."</p>"."<p>PORT".$dbopts['port']."</p>".'<p>PATH'.ltrim($dbopts["path"],'/').'</p>';
+	return "<p>DATABASE_URL".getenv('DATABASE_URL')."</p>"."<p>DBOPTS".$dbopts.'</p>';
 });
 
 $app->run();
