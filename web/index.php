@@ -33,7 +33,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app->get('/', function() use($app) {
   $app['monolog']->addDebug('logging output.');
-  return str_repeat('Hello', getenv('TIMES'));
+  return $app['twig']->render('index.twig');
 });
 
 $app->get('/cowsay', function() use($app) {
@@ -42,19 +42,21 @@ $app->get('/cowsay', function() use($app) {
 });
 
 $app->get('/db/', function() use($app) {
-	// $st = $app['pdo']->prepare('SELECT name FROM test_table');
-	// $st->execute();
+	$st = $app['pdo']->prepare('SELECT name FROM test_table');
+	$st->execute();
 
-	// $names = array();
-	// while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-	// 	$app['monolog']->addDebug('Row ' . $row['name']);
-	// 	$names[] = $row;
-	// }
+	$names = array();
+	while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+		$app['monolog']->addDebug('Row ' . $row['name']);
+		$names[] = $row;
+	}
 
-	// return $app['twig']->render('database.twig', array(
-	// 	'names' => $names
-	// ));
-	return "<p>DATABASE_URL".getenv('DATABASE_URL')."</p>"."<p>DBOPTS".print_r(parse_url(getenv('DATABASE_URL')),true).'</p>';
+	return $app['twig']->render('database.twig', array(
+		'names' => $names
+	));
+
+	// DEBUGGING
+	// return "<p>DATABASE_URL".getenv('DATABASE_URL')."</p>"."<p>DBOPTS".print_r(parse_url(getenv('DATABASE_URL')),true).'</p>';
 });
 
 $app->run();
