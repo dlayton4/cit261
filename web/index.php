@@ -6,7 +6,7 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 $dbopts = parse_url(getenv('DATABSE_URL'));
-$app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PdoServiceProvider('pdo'),
+$app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
 	array(
 		'pdo.server' => array(
 			'driver' => 'pgsql',
