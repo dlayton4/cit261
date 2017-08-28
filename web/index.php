@@ -54,10 +54,10 @@ $app->get('/db/', function() use($app) {
 	// return $app['twig']->render('database.twig', array(
 	// 	'names' => $names
 	// ));
-	echo "<p>$dbopts['user']</p>";
-	echo "<p>$dbopts['pass']</p>";
-	echo "<p>$dbopts['host']</p>";
-	echo "<p>$dbopts['port']</p>";
+	echo "<p>".$dbopts['user']."</p>";
+	echo "<p>".$dbopts['pass']."</p>";
+	echo "<p>".$dbopts['host']."</p>";
+	echo "<p>".$dbopts['port']."</p>";
 	echo '<p>'.ltrim($dbopts["path"],'/').'</p>';
 });
 
